@@ -67,6 +67,7 @@ function playTo(x) {
           break;
         default:
           gameTie += 1;
+          i-=1;
       }
     }
     return [playerWins, computerWins];
