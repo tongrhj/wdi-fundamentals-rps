@@ -40,9 +40,9 @@ function getWinner(playerMove,computerMove) {
     // Write code that will set winner to either 'player', 'computer', or 'tie' based on the values of playerMove and computerMove.
     // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
     // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
-    if ((playerMove="rock" && computerMove="scissors") || (playerMove="scissors" && computerMove="paper") || (playerMove="paper" && computerMove="rock")) {
+    if ((playerMove=="rock" && computerMove=="scissors") || (playerMove=="scissors" && computerMove=="paper") || (playerMove=="paper" && computerMove=="rock")) {
       winner="player";
-    } else if ((computerMove="rock" && playerMove="paper") || (computerMove="scissors" && playerMove="paper") || (computerMove="paper" && playerMove="rock")) {
+    } else if ((computerMove=="rock" && playerMove=="paper") || (computerMove=="scissors" && playerMove=="paper") || (computerMove=="paper" && playerMove=="rock")) {
       winner="computer";
     } else {
       winner="tie";
@@ -50,11 +50,24 @@ function getWinner(playerMove,computerMove) {
     return winner;
 }
 
-function playToFive() {
+function playTo(x) {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
-    // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
-    /* YOUR CODE HERE */
+    var gameTie = 0;
+    // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won 'x' times.
+    for (var i = 0; i < x; i += 1) {
+      var winner = getWinner(getPlayerMove(),getComputerMove());
+      switch (winner) {
+        case "player":
+          playerWins += 1;
+          break;
+        case "computer":
+          computerWins += 1;
+          break;
+        default:
+          gameTie += 1;
+      }
+    }
     return [playerWins, computerWins];
 }
