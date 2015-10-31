@@ -56,8 +56,13 @@ function playTo(x) {
     var computerWins = 0;
     var gameTie = 0;
     // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won 'x' times.
-    for (var i = 0; i < x; i += 1) {
+    for (var i = 1; i > 0; i += 1) {
+      if ((playerWins === x) || (computerWins === x))  {
+        i = -100;
+        break;
+      } //this is dangerous code because the user might enter a negative value for x and this will loop infinitely- what's the better way to achieve this?
       var winner = getWinner(getPlayerMove(),getComputerMove());
+      console.log("Result: "+winner);
       switch (winner) {
         case "player":
           playerWins += 1;
