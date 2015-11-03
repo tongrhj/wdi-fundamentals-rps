@@ -5,8 +5,10 @@
 
 function getInput() {
     console.log("Please choose either 'rock', 'paper', or 'scissors'.")
-    return prompt();
+    var inputNotInput = prompt()
+    return inputNotInput.toLowerCase();
 }
+
 function randomPlay() {
     var randomNumber = Math.random();
     if (randomNumber < 0.33) {
@@ -40,13 +42,17 @@ function getWinner(playerMove,computerMove) {
     // Write code that will set winner to either 'player', 'computer', or 'tie' based on the values of playerMove and computerMove.
     // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
     // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
-    if ((playerMove=="rock" && computerMove=="scissors") || (playerMove=="scissors" && computerMove=="paper") || (playerMove=="paper" && computerMove=="rock")) {
+    if (playerMove!="rock" && playerMove!="scissors" && playerMove!="paper") {
+      alert("dont cb");
+      winner = "tie";
+    } else if ((playerMove=="rock" && computerMove=="scissors") || (playerMove=="scissors" && computerMove=="paper") || (playerMove=="paper" && computerMove=="rock")) {
       winner="player";
     } else if ((computerMove=="rock" && playerMove=="paper") || (computerMove=="scissors" && playerMove=="paper") || (computerMove=="paper" && playerMove=="rock")) {
       winner="computer";
     } else {
       winner="tie";
     }
+    console.log("Player throws "+playerMove+" VS "+computerMove)
     return winner;
 }
 
@@ -56,13 +62,9 @@ function playTo(x) {
     var computerWins = 0;
     var gameTie = 0;
     // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won 'x' times.
-    for (var i = 1; i > 0; i += 1) {
-      if ((playerWins === x) || (computerWins === x))  {
-        i = -100;
-        break;
-      } //this is dangerous code because the user might enter a negative value for x and this will loop infinitely- what's the better way to achieve this?
+    while ((playerWins < x) && (computerWins < x)) {
       var winner = getWinner(getPlayerMove(),getComputerMove());
-      console.log("Result: "+winner);
+      console.log("RESULT: "+winner);
       switch (winner) {
         case "player":
           playerWins += 1;
@@ -72,8 +74,7 @@ function playTo(x) {
           break;
         default:
           gameTie += 1;
-          i-=1;
       }
-    }
+    };
     return [playerWins, computerWins];
 }
